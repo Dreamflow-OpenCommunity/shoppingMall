@@ -32,48 +32,29 @@ public class Product {
 
     //<<< Clean Arch / Port Method
     public static void decreaseStock(OrderPlaced orderPlaced) {
-        //implement business logic here:
 
-        /** Example 1:  new item 
-        Product product = new Product();
-        repository().save(product);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderPlaced.get???()).ifPresent(product->{
+        repository().findById(orderPlaced.getProductId()).ifPresent(product->{
             
-            product // do something
+            product.setStock(product.getStock() - orderPlaced.getQuantity());
             repository().save(product);
 
 
          });
-        */
+
 
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void increaseStock(OrderCanceled orderCanceled) {
-        //implement business logic here:
 
-        /** Example 1:  new item 
-        Product product = new Product();
-        repository().save(product);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderCanceled.get???()).ifPresent(product->{
+        repository().findById(orderCanceled.getProductId()).ifPresent(product->{
             
-            product // do something
+            product.setStock(product.getStock() + orderCanceled.getQuantity());
             repository().save(product);
 
 
          });
-        */
 
     }
     //>>> Clean Arch / Port Method
