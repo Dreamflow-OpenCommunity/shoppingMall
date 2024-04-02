@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import shoppingmall.DeliveryServiceApplication;
 
 @Entity
 @Table(name = "Delivery_table")
-@Data
-//<<< DDD / Aggregate Root
+@Getter
+@Setter
 public class Delivery {
 
     @Id
@@ -31,48 +33,28 @@ public class Delivery {
         return deliveryRepository;
     }
 
-    //<<< Clean Arch / Port Method
     public void deliveryStart() {
-        //implement business logic here:
 
         DeliveryStarted deliveryStarted = new DeliveryStarted(this);
+        this.setDeliveryStatus("배송 시작");
         deliveryStarted.publishAfterCommit();
     }
 
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
+
     public void deliveryComplete() {
         //implement business logic here:
 
         DeliveryCompleted deliveryCompleted = new DeliveryCompleted(this);
+        this.setDeliveryStatus("배송 완료");
         deliveryCompleted.publishAfterCommit();
     }
 
-    //>>> Clean Arch / Port Method
-
-    //<<< Clean Arch / Port Method
     public static void addDeliveryInfo(OrderPlaced orderPlaced) {
-        //implement business logic here:
 
-        /** Example 1:  new item 
         Delivery delivery = new Delivery();
+        delivery.setOrderId(orderPlaced.getId());
         repository().save(delivery);
 
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderPlaced.get???()).ifPresent(delivery->{
-            
-            delivery // do something
-            repository().save(delivery);
-
-
-         });
-        */
-
     }
-    //>>> Clean Arch / Port Method
-
 }
-//>>> DDD / Aggregate Root
+
