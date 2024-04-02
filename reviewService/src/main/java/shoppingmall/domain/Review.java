@@ -45,31 +45,15 @@ public class Review {
         reviewCreated.publishAfterCommit();
     }
 
-    //>>> Clean Arch / Port Method
-
     //<<< Clean Arch / Port Method
     public static void addReviewList(OrderConfirmed orderConfirmed) {
-        //implement business logic here:
 
-        /** Example 1:  new item 
         Review review = new Review();
+        review.setCustomerId(orderConfirmed.getCustomerId());
+        review.setProductId(orderConfirmed.getProductId());
         repository().save(review);
 
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(orderConfirmed.get???()).ifPresent(review->{
-            
-            review // do something
-            repository().save(review);
-
-
-         });
-        */
-
     }
-    //>>> Clean Arch / Port Method
 
 }
 //>>> DDD / Aggregate Root
