@@ -34,17 +34,11 @@ spring:
           predicates:
             - Path=/**
 #>>> API Gateway / Routes
-      globalcors:
+      globals:
         corsConfigurations:
           '[/**]':
-            allowedOrigins:
+            allowedOriginPatterns:
               - "*"
-            allowedMethods:
-              - "*"
-            allowedHeaders:
-              - "*"
-            allowCredentials: true
-
 
 ---
 
@@ -77,16 +71,11 @@ spring:
           uri: http://frontend:8080
           predicates:
             - Path=/**
-      globalcors:
+      globals:
         corsConfigurations:
           '[/**]':
-            allowedOrigins:
+            allowedOriginPatterns:
               - "*"
-            allowedMethods:
-              - "*"
-            allowedHeaders:
-              - "*"
-            allowCredentials: true
 
 server:
   port: 8080
