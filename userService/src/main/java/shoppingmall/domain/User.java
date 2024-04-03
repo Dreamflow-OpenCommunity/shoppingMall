@@ -3,9 +3,11 @@ package shoppingmall.domain;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+
 import lombok.Data;
 import shoppingmall.UserServiceApplication;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "User_table")
