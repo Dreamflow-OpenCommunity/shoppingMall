@@ -35,7 +35,7 @@ public class PolicyHandler {
             "\n\n##### listener AddDeliveryInfo : " + orderPlaced + "\n\n"
         );
 
-        // Sample Logic //
+
         Delivery.addDeliveryInfo(event);
     }
 }

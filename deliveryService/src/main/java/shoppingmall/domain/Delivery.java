@@ -53,6 +53,7 @@ public class Delivery {
 
         Delivery delivery = new Delivery();
         delivery.setOrderId(orderPlaced.getId());
+        delivery.setDeliveryStatus("배송 준비");
         repository().save(delivery);
 
     }
