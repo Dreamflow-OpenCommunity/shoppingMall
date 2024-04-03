@@ -1,15 +1,16 @@
 package shoppingmall.domain;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.*;
-import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PostPersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import shoppingmall.OrderServiceApplication;
-import shoppingmall.domain.OrderPlaced;
-
 @Entity
 @Table(name = "Order_table")
 @Getter
