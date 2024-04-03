@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -19,54 +20,48 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
-public class ResourceSecurityConfig {
+public class ResourceSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
-            .cors()
-            .and()
-            .csrf()
-            .disable()
-            .authorizeRequests(exchange ->
-                exchange
-                    // .antMatchers("/orders/placeOrder**").hasRole("CUSTOMER")	// You can protect resource here, or each Method Level
-                    // .antMatchers("/orders/manageOrder**").hasRole("ADMIN")
-                    .anyRequest()
-                    .authenticated()
-            )
-            .oauth2ResourceServer()
-            .jwt(jwt ->
-                jwt.jwtAuthenticationConverter(grantedAuthoritiesExtractor())
-            );
-
-        return http.build();
+                .cors()
+                .and()
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .oauth2ResourceServer()
+                .jwt()
+                .jwtAuthenticationConverter(grantedAuthoritiesExtractor());
     }
 
     private Converter<Jwt, ? extends AbstractAuthenticationToken> grantedAuthoritiesExtractor() {
         JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
         jwtConverter.setJwtGrantedAuthoritiesConverter(
-            new GrantedAuthoritiesExtractor()
+                new GrantedAuthoritiesExtractor()
         );
         return jwtConverter;
     }
 
     static class GrantedAuthoritiesExtractor
-        implements Converter<Jwt, Collection<GrantedAuthority>> {
+            implements Converter<Jwt, Collection<GrantedAuthority>> {
 
         public Collection<GrantedAuthority> convert(Jwt jwt) {
             final Map<String, Collection<String>> realmAccess = jwt.getClaim(
-                "realm_access"
+                    "realm_access"
             );
             Collection<String> roles = realmAccess.get("roles");
             for (String role : roles) System.out.println(
-                "\n ===> Granted Role is :" + role.toString() + "\n"
+                    "\n ===> Granted Role is :" + role.toString() + "\n"
             );
 
             return roles
-                .stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                .collect(Collectors.toList());
+                    .stream()
+                    .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                    .collect(Collectors.toList());
         }
     }
 }
