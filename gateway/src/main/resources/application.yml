@@ -1,9 +1,5 @@
-
 server:
   port: 8088
-
----
-
 
 keycloak-client:
   server-url: http://localhost:9090
@@ -16,28 +12,28 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - TokenRelay 
+        - TokenRelay
       routes:
         - id: orderService
           uri: http://localhost:8082
           predicates:
-            - Path=/orders/**,  
+            - Path=/orders/**
         - id: deliveryService
           uri: http://localhost:8083
           predicates:
-            - Path=/deliveries/**,  
+            - Path=/deliveries/**
         - id: productService
           uri: http://localhost:8084
           predicates:
-            - Path=/products/**,  
+            - Path=/products/**
         - id: reviewService
           uri: http://localhost:8085
           predicates:
-            - Path=/reviews/**,  
+            - Path=/reviews/**
         - id: userService
           uri: http://localhost:8086
           predicates:
-            - Path=/users/**,  
+            - Path=/users/**
         - id: frontend
           uri: http://localhost:8080
           predicates:
@@ -57,8 +53,8 @@ spring:
         registration:
           keycloak:
             client-id: "<client-id>"
-            client-secret: 
-            redirect-uri: "gateway-path/login/oauth2/code/client-name"
+            client-secret: "<client-secret>"
+            redirect-uri: "gateway/login/oauth2/code/shoppingMall"
             authorization-grant-type: authorization_code
             scope: openid
       resource-server:
@@ -66,7 +62,6 @@ spring:
           jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
 
 ---
-
 spring:
   config:
     activate:
@@ -74,26 +69,26 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: orderService
-          uri: http://orderService:8080
+        - id: order
+          uri: http://order:8080
           predicates:
-            - Path=/orders/** 
-        - id: deliveryService
-          uri: http://deliveryService:8080
+            - Path=/orders/**
+        - id: delivery
+          uri: http://delivery:8080
           predicates:
-            - Path=/deliveries/** 
-        - id: productService
-          uri: http://productService:8080
+            - Path=/deliveries/**
+        - id: product
+          uri: http://product:8080
           predicates:
-            - Path=/products/** 
-        - id: reviewService
-          uri: http://reviewService:8080
+            - Path=/products/**
+        - id: review
+          uri: http://review:8080
           predicates:
-            - Path=/reviews/** 
-        - id: userService
-          uri: http://userService:8080
+            - Path=/reviews/**
+        - id: user
+          uri: http://user:8080
           predicates:
-            - Path=/users/** 
+            - Path=/users/**
       globals:
         corsConfigurations:
           '[/**]':
@@ -109,8 +104,8 @@ spring:
         registration:
           keycloak:
             client-id: "<client-id>"
-            client-secret: 
-            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            client-secret: "<client-secret>"
+            redirect-uri: "gateway/login/oauth2/code/shoppingMall"
             authorization-grant-type: authorization_code
             scope: openid
       resource-server:

@@ -104,18 +104,18 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}
+            issuer-uri: http://a3b76538de3f24eceb74e669863aea42-1228422675.ap-northeast-2.elb.amazonaws.com:8080/auth/realms/master
             user-name-attribute: preferred_username
         registration:
           keycloak:
-            client-id: "<client-id>"
-            client-secret: 
-            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            client-id: shoppingMall
+            client-secret: 6c1cd798-331c-4224-a74a-913792159494
+            redirect-uri: http://gateway:8080/login/oauth2/code/shoppingMall
             authorization-grant-type: authorization_code
             scope: openid
       resource-server:
         jwt:
-          jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+          jwk-set-uri: http://a3b76538de3f24eceb74e669863aea42-1228422675.ap-northeast-2.elb.amazonaws.com:8080/auth/realms/master/protocol/openid-connect/certs
 
 server:
   port: 8080
