@@ -3,22 +3,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orderService
+  name: order
   labels:
-    app: orderService
+    app: order
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orderService
+      app: order
   template:
     metadata:
       labels:
-        app: orderService
+        app: order
     spec:
       containers:
-        - name: orderService
-          image: username/orderService:latest
+        - name: order
+          image: <도커허브아이디>/<이미지이름>:<태그>
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -43,22 +43,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deliveryService
+  name: delivery
   labels:
-    app: deliveryService
+    app: delivery
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: deliveryService
+      app: delivery
   template:
     metadata:
       labels:
-        app: deliveryService
+        app: delivery
     spec:
       containers:
-        - name: deliveryService
-          image: username/deliveryService:latest
+        - name: delivery
+          image: <도커허브아이디>/<이미지이름>:<태그>
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -83,22 +83,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: productService
+  name: product
   labels:
-    app: productService
+    app: product
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: productService
+      app: product
   template:
     metadata:
       labels:
-        app: productService
+        app: product
     spec:
       containers:
-        - name: productService
-          image: username/productService:latest
+        - name: product
+          image: <도커허브아이디>/<이미지이름>:<태그>
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -123,22 +123,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reviewService
+  name: review
   labels:
-    app: reviewService
+    app: review
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: reviewService
+      app: review
   template:
     metadata:
       labels:
-        app: reviewService
+        app: review
     spec:
       containers:
-        - name: reviewService
-          image: username/reviewService:latest
+        - name: review
+          image: <도커허브아이디>/<이미지이름>:<태그>
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -163,22 +163,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userService
+  name: user
   labels:
-    app: userService
+    app: user
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: userService
+      app: user
   template:
     metadata:
       labels:
-        app: userService
+        app: user
     spec:
       containers:
-        - name: userService
-          image: username/userService:latest
+        - name: user
+          image: <도커허브아이디>/<이미지이름>:<태그>
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -205,15 +205,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: orderService
+  name: order
   labels:
-    app: orderService
+    app: order
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: orderService
+    app: order
 
 
 ---
@@ -222,15 +222,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: deliveryService
+  name: delivery
   labels:
-    app: deliveryService
+    app: delivery
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: deliveryService
+    app: delivery
 
 
 ---
@@ -239,15 +239,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: productService
+  name: product
   labels:
-    app: productService
+    app: product
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: productService
+    app: product
 
 
 ---
@@ -256,15 +256,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: reviewService
+  name: review
   labels:
-    app: reviewService
+    app: review
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: reviewService
+    app: review
 
 
 ---
@@ -273,13 +273,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: userService
+  name: user
   labels:
-    app: userService
+    app: user
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: userService
+    app: user
 

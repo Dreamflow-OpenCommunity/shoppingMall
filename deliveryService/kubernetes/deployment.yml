@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: delivery
   labels:
-    app: gateway
+    app: delivery
 spec:
   replicas: 1
   selector:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: delivery
-          image: username/delivery_service:latest
+          image: <도커허브아이디>/<이미지이름>:<태그>
           ports:
             - containerPort: 8080
