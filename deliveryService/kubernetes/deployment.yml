@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: delivery
-          image: hosunglee222/delivery_service:latest
+          image: username/delivery_service:latest
           ports:
             - containerPort: 8080
