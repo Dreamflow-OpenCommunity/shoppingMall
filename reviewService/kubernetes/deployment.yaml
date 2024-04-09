@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: delivery
+  name: review
   labels:
     app: gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: delivery
+      app: review
   template:
     metadata:
       labels:
-        app: delivery
+        app: review
     spec:
       containers:
-        - name: delivery
-          image: hosunglee222/delivery_service:latest
+        - name: review
+          image: hosunglee222/review:latest
           ports:
             - containerPort: 8080
