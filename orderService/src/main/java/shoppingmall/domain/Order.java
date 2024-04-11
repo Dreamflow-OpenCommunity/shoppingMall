@@ -68,7 +68,7 @@ public class Order {
 
         repository().findById(deliveryStarted.getOrderId()).ifPresent(order->{
             
-            order.setOrderStatus("배송 시작");
+            order.setDeliveryStatus("배송 시작");
             repository().save(order);
 
          });
@@ -79,7 +79,7 @@ public class Order {
 
         repository().findById(deliveryCompleted.getOrderId()).ifPresent(order->{
 
-            order.setOrderStatus("배송 시작");
+            order.setDeliveryStatus("배송 시작");
             repository().save(order);
 
         });
